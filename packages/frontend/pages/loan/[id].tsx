@@ -280,7 +280,7 @@ function LoanDetails(loan: LoanWithMetadata): ReactElement {
           <p>
             This NFT is currently owned and lent out by{" "}
             <a
-              href={`https://rinkeby.etherscan.io/address/${loan.tokenOwner}`}
+              href={`https://goerli.etherscan.io/address/${loan.tokenOwner}`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -294,7 +294,7 @@ function LoanDetails(loan: LoanWithMetadata): ReactElement {
             <p>
               The current top lender is{" "}
               <a
-                href={`https://rinkeby.etherscan.io/address/${loan.lender}`}
+                href={`https://goerli.etherscan.io/address/${loan.lender}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -309,7 +309,7 @@ function LoanDetails(loan: LoanWithMetadata): ReactElement {
           <p>
             This NFT is token ID {loan.tokenId} of contract{" "}
             <a
-              href={`https://rinkeby.etherscan.io/address/${loan.tokenAddress}`}
+              href={`https://goerli.etherscan.io/address/${loan.tokenAddress}`}
               target="_blank"
               rel="noopener noreferrer"
             >

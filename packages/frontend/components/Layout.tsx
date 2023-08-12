@@ -3,7 +3,6 @@ import { eth } from "@state/eth"; // State management
 import type { ReactElement } from "react"; // Types
 import NextNProgress from "nextjs-progressbar"; // Navigation progress bar
 import styles from "@styles/components/Layout.module.scss"; // Component styles
-import Jazzicon, { jsNumberForAddress } from "react-jazzicon"; // Jazzicon
 
 /**
  * Layout wrapper for application
@@ -79,7 +78,9 @@ function Header(): ReactElement {
               </span>
 
               {/* Render avatar */}
+              {/* TODO: Replace with Rainbow Connect 
               <Jazzicon diameter={16} seed={jsNumberForAddress(address)} />
+              */}
             </>
           ) : (
             // Else, if not unlocked, show prompt string
