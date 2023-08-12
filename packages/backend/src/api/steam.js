@@ -61,7 +61,7 @@ router.post('/inventory', (req, res) => {
 });
 
 // eslint-disable-next-line consistent-return
-router.post('/init-trade', (req, res) => {
+router.post('/init-trade', async (req, res) => {
   const { tradeURL, itemIds, walletAddress } = req.body;
 
   if (!tradeURL || !itemIds || itemIds.length === 0) {
@@ -74,12 +74,21 @@ router.post('/init-trade', (req, res) => {
   });
   offer.setMessage(`Asset will be sent to: ${walletAddress}`);
 
+  // offer.send((err, status) => {
+  //   if (err) {
+  //     console.error(`Error sending offer: ${err.message}`);
+  //     return res.status(500).send({ error: 'Error sending offer.' });
+  //   }
+  //   return res.json({ message: `Offer sent with status: ${status}` });
+  // });
+
   offer.send((err, status) => {
     if (err) {
       console.error(`Error sending offer: ${err.message}`);
       return res.status(500).send({ error: 'Error sending offer.' });
     }
-    return res.json({ message: `Offer sent with status: ${status}` });
+    console.log(status);
+    return res.json({ offerId: offer.id }); // Return the offer ID
   });
 });
 
