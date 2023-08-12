@@ -37,3 +37,8 @@ export interface LoanWithMetadata extends Loan {
   // NFT description
   description: string;
 }
+
+export interface TokenizedSkin {
+  tokenId: number;
+  // Add other properties you want to track here
+}

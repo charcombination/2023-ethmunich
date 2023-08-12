@@ -52,7 +52,8 @@ export default function Create() {
   const [inventory, setInventory] = useState([]);
   const [selectedAsset, setSelectedAsset] = useState(null);
   const [tradeToken, setTradeToken] = useState("8nUPXs46");
-  const [tradeOfferLink, setTradeOfferLink] = useState<String | null>(null);
+  const [tradeOfferLink, setTradeOfferLink] = useState<String | null>("2");
+  const [requireRefresh, setRequireRefresh] = useState(false);
 
   /**
    * Renders button based on current state
@@ -68,13 +69,15 @@ export default function Create() {
     } else if(state === State.tokenizeAsset && !selectedAsset) {
       // Inventory shown and no item selected
       return <button disabled>Select an Asset to Tokenize</button>
+    } else if(state === State.tokenizeAsset && tradeOfferLink) {
+      // Bot already created the trade offer (final step)
+      return <button onClick={() => {window.open(tradeOfferLink); setState(State.selectNFT)}}>Transfer "{selectedAsset.description.name}" to Tokenize</button>
     } else if(state === State.tokenizeAsset && !loading) {
       // Initiate trade offer and setLoading
-      return <button onClick={() => requestTradeOffer(selectedAsset.id, address)}>Transfer "{selectedAsset.description.name}" to Tokenize</button>
-    } else if (state === State.tokenizeAsset) {
-      // Bot is creating a trade offer
-      return <button disabled>Creating offer, please wait...</button>
-    } else if (state === State.selectNFT && selected) {
+      return <button onClick={() => requestTradeOffer(selectedAsset.id, address)}>Create Trade Offer</button>
+    } else if(state === State.tokenizeAsset) {
+      // Else
+    } else if(state === State.selectNFT && selected) {
       // NFT selected
       return (
         <button onClick={() => setState(State.setTerms)}>Craft terms</button>
@@ -114,14 +117,13 @@ export default function Create() {
    */
   async function requestTradeOffer(assetID: number, addr: String): Promise<void> {
     setLoading(true);
-
     try {
       const response = await axios.get(`http://127.0.0.1:3011/init-trade/${assetID}/${addr}`);
       setTradeOfferLink(`https://steamcommunity.com/tradeoffer/${response.data}`);
+      console.log(`https://steamcommunity.com/tradeoffer/${response.data}`);
     } catch (error) {
-      toast.error("Error when fetching the inventory.");
+      toast.error("Error when requesting the trade offer.");
     }
-
     setLoading(false);
   }
 
@@ -147,25 +149,17 @@ export default function Create() {
       // setLoading(false);
   }
 
-
   /**
    * Collects ERC721 NFTs from OpenSea API
    */
   async function collectNFTs(): Promise<void> {
-    setLoading(true); // Toggle loading
-
-    // Collect NFTs from OpenSea
     try {
-      const response = await axios.get(
-        `https://goerli-api.opensea.io/api/v1/assets?owner=${address}&order_direction=desc&offset=${numOSNFTs}&limit=9`
-      );
-      setNumOSNFTs(response.data.assets.length); // Update number of retrieved NFTs
-      setNFTList([...NFTList, ...filter721(response.data.assets)]);
-    } catch {
+      const response = await axios.post('/api/tokenized_skins', { address: address });
+      setNumOSNFTs(response.data.assets.length);
+      setNFTList(response.data);
+    } catch (error) {
       toast.error("Error when collecting wallet NFT's.");
     }
-
-    setLoading(false); // Toggle loading
   }
 
   /**
@@ -229,7 +223,7 @@ export default function Create() {
                     : undefined
                 }
               >
-                <span>Tokenize</span>
+                <span className={styles.ac} onClick={() => setState(State.tokenizeAsset)}>Tokenize</span>
               </div>
 
               {/* Select NFT */}
@@ -240,7 +234,7 @@ export default function Create() {
                     : undefined
                 }
               >
-                <span>Create Loan</span>
+                <span className={styles.ac} onClick={() => setState(State.selectNFT)}>Create Loan</span>
               </div>
 
               {/* Set Terms */}
@@ -300,7 +294,7 @@ export default function Create() {
                       </>
                     ) : (
                       // If user does not own NFTs
-                      <NoOwnedNFTs />
+                      !loading && <NoOwnedNFTs collectNFTs={collectNFTs} />
                     )}
                     {loading ? (
                       // If user NFTs are being loaded
@@ -451,12 +445,14 @@ function CreateLoadingNFTs(): ReactElement {
  * State when user does not own any ERC721 NFTs
  * @returns {ReactElement}
  */
-function NoOwnedNFTs(): ReactElement {
+function NoOwnedNFTs({ collectNFTs }): JSX.Element {
   return (
     <div className={styles.create__action_content_unauthenticated}>
       <img src="/vectors/empty.svg" alt="Empty" height="30px" />
       <h3>No NFTs in wallet.</h3>
       <p>Please tokenize your skin before trying to create loan.</p>
+      <button onClick={collectNFTs}>Refresh</button>
+      
     </div>
   );
 }
