@@ -1,7 +1,7 @@
 const express = require('express');
-const passport = require('passport');
 const axios = require('axios');
 
+const steamTradesDomain = require('../domain/steamTrades');
 
 const { STEAM_API_KEY } = process.env;
 const CSGO_GAME_ID = '730';
@@ -30,6 +30,29 @@ router.get('/find-user-id/:steamUsername', async (req, res) => {
     // console.error(error);
     return res.status(500).json({ error: 'Error fetching Steam inventory' });
   }
+});
+
+// eslint-disable-next-line consistent-return
+router.post('/init-trade', (req, res) => {
+  const { tradeURL, itemIds } = req.body;
+
+  if (!tradeURL || !itemIds || itemIds.length === 0) {
+    return res.status(400).send({ error: 'Missing tradeURL or items.' });
+  }
+
+  const offer = steamTradesDomain.manager.createOffer(tradeURL);
+  itemIds.forEach((id) => {
+    offer.addTheirItem({ appid: CSGO_GAME_ID, contextid: '2', assetid: id });
+  });
+  offer.setMessage('INTERACTION_ID'); // TODO
+
+  offer.send((err, status) => {
+    if (err) {
+      console.error(`Error sending offer: ${err.message}`);
+      return res.status(500).send({ error: 'Error sending offer.' });
+    }
+    return res.json({ message: `Offer sent with status: ${status}` });
+  });
 });
 
 module.exports = router;

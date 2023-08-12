@@ -1,4 +1,3 @@
-packages/*
 packages/subgraph/generated
 packages/subgraph/abis/*
 packages/hardhat/*.txt

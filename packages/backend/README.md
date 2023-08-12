@@ -7,6 +7,7 @@ Remember to create .env file before running `npm run start`.
 
 ```
 .env
-
-DB_PASSWORD=
+STEAM_API_KEY=
+STEAM_USERNAME=
+STEAM_PASSWORD=
 ```
