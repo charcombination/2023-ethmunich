@@ -4,7 +4,9 @@ const SteamUser = require('steam-user');
 const SteamCommunity = require('steamcommunity');
 const TradeOfferManager = require('steam-tradeoffer-manager');
 
-const { STEAM_USERNAME, STEAM_PASSWORD } = process.env;
+const {
+  STEAM_USERNAME, STEAM_PASSWORD, STEAM_API_KEY, STEAM_DOMAIN,
+} = process.env;
 
 const logonOptions = {
   accountName: STEAM_USERNAME,
@@ -18,8 +20,10 @@ const client = new SteamUser({
 const community = new SteamCommunity();
 const manager = new TradeOfferManager({
   steam: client,
+  domain: STEAM_DOMAIN,
   community,
   language: 'en',
+  apiKey: STEAM_API_KEY,
 });
 
 const mintNFT = (userAddress) => {
