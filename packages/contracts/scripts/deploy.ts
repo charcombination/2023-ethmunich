@@ -14,10 +14,10 @@ async function main(): Promise<void> {
   console.log("Deployed PawnBank address:", pawnbank.address);
 
   // Deploy MintNFT
-  /*const NFTMintFactory = await ethers.getContractFactory("NFTMint");
-  const NFTMintInstance = await NFTMintFactory.deploy();
+  const NFT = await ethers.getContractFactory("NFT");
+  const nftmint = await NFT.deploy();
 
-  console.log("Deployed NFTMint ", NFTMintFactory);*/
+  console.log("Deployed NFTMint ", NFT);
 }
 
 main()
