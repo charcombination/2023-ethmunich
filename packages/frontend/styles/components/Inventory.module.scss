@@ -1,0 +1,41 @@
+/* Modified from https://github.com/charcombination/pixeldex/ */
+.inventory_elements {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    margin-top: 16px;
+}
+
+.inventory_element {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 85px;
+    height: 85px;
+    background-color: #E4E6EC;
+    border-radius: 4px;
+    border: 1px solid transparent;
+}
+
+.inventory_element:hover {
+    border: 1px solid #EB3331;
+}
+
+.inventory_element img {
+    height: 71px;
+    width: auto;
+}
+
+.selection_marker {
+    height: 8px;
+    width: 8px;
+    border-radius: 4px;
+    background-color: red;
+
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
