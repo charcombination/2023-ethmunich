@@ -97,7 +97,7 @@ export default function Create() {
     // Collect NFTs from OpenSea
     try {
       const response = await axios.get(
-        `https://rinkeby-api.opensea.io/api/v1/assets?owner=${address}&order_direction=desc&offset=${numOSNFTs}&limit=9`
+        `https://goerli-api.opensea.io/api/v1/assets?owner=${address}&order_direction=desc&offset=${numOSNFTs}&limit=9`
       );
       setNumOSNFTs(response.data.assets.length); // Update number of retrieved NFTs
       // Update ERC721 nfts

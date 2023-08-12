@@ -1,4 +1,3 @@
-import Redis from "ioredis"; // Redis
 import type { NextApiRequest, NextApiResponse } from "next";
 
 /**
@@ -15,15 +14,15 @@ const metadata = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   // Setup redis and data structure
-  const client = new Redis(process.env.REDIS_URL);
-  let existingData = await client.get("metadata");
+  // const client = new Redis(process.env.REDIS_URL);
+  // let existingData = await client.get("metadata");
   let newData: Record<string, Record<string, string>> = {};
 
   // If data exists
-  if (existingData) {
-    // Parse and replace structure
-    newData = JSON.parse(existingData);
-  }
+  // if (existingData) {
+  //   // Parse and replace structure
+  //   newData = JSON.parse(existingData);
+  // }
 
   // Update structure with new metadata
   newData[`${tokenAddress.toLowerCase()}-${tokenId.toString()}`] = {
@@ -33,7 +32,7 @@ const metadata = async (req: NextApiRequest, res: NextApiResponse) => {
   };
 
   // Save metadata and return
-  await client.set("metadata", JSON.stringify(newData));
+  // await client.set("metadata", JSON.stringify(newData));
   res.status(200).send({ success: true });
 };
 

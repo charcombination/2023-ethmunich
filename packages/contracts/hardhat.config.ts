@@ -22,12 +22,7 @@ export default {
         url: `https://eth-mainnet.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
         blockNumber: 12864983,
       },
-    },
-    // Deploy to Rinkeby
-    rinkeby: {
-      url: `https://eth-rinkeby.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
-      accounts: [`${RINKEBY_DEPLOY_PK}`],
-    },
+    }
   },
   // Gas reporting
   gasReporter: {

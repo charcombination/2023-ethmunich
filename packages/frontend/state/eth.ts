@@ -42,7 +42,7 @@ function useEth() {
     // Onboard provider
     const onboard = Onboard({
       // Rinkeby testnet
-      networkId: 4,
+      networkId: 5,
       // Hide Blocknative branding
       hideBranding: true,
       // Setup custom wallets for selection

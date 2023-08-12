@@ -10,8 +10,8 @@ export const PawnBankRPC = new ethers.Contract(
   PAWN_BANK_ADDRESS,
   PawnBankABI,
   new ethers.providers.JsonRpcProvider(
-    `https://rinkeby.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_RPC}`,
-    4
+    `https://goerli.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_RPC}`,
+    5
   )
 );
 

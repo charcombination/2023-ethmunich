@@ -1,4 +1,3 @@
-import Redis from "ioredis"; // Redis
 import { parseEther, PawnBankRPC } from "@utils/ethers"; // RPC
 
 // Types
@@ -15,12 +14,13 @@ export async function collectSingleLoan(
 ): Promise<LoanWithMetadata> {
   // FIXME: hack to bypass OpenSea depencency
   // Retrieve metadata for all NFTs
-  const client = new Redis(process.env.REDIS_URL);
-  let request = await client.get("metadata");
+  // TODO: Remove Redis
+  // const client = new Redis(process.env.REDIS_URL);
+  // let request = await client.get("metadata");
   let metadata: Record<string, Record<string, string>> = {};
-  if (request) {
-    metadata = JSON.parse(request);
-  }
+  // if (request) {
+  //   metadata = JSON.parse(request);
+  // }
 
   // Collect loan
   const loan: any[] = await PawnBankRPC.pawnLoans(loanId);
