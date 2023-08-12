@@ -131,12 +131,12 @@ export default function Create() {
   async function requestTradeOffer(assetID: number, addr: string): Promise<void> {
     const requestData = {
       tradeURL: gamerTradelink, // Replace with your tradeURL
-      itemIds: [selectedAsset.id], // Replace with your itemIds array
+      itemIds: [15159666845], // Replace with your itemIds array
       walletAddress: address // Replace with your wallet address
     };
-  
-    const response = await axios.post('http://127.0.0.1:3011/init-trade', requestData);
-    setTradeOfferLink(`https://steamcommunity.com/tradeoffer/${response.data}`);
+    
+    const response = await axios.post('http://127.0.0.1:3011/api/v1/steam/init-trade', requestData);
+    setTradeOfferLink(`https://steamcommunity.com/tradeoffer/${response.data.offerId}`);
   }
 
   /**
