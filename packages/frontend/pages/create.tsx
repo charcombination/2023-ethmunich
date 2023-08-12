@@ -13,8 +13,9 @@ import { NextRouter, useRouter } from "next/dist/client/router"; // Next router
  * Selection states
  */
 enum State {
+  tokenizeAsset = -1,
   selectNFT = 0,
-  setTerms = 1,
+  setTerms = 1
 }
 
 export default function Create() {
@@ -27,7 +28,7 @@ export default function Create() {
   const { createLoan }: { createLoan: Function } = loan.useContainer();
 
   // Current page state (Select / Set)
-  const [state, setState] = useState<number>(State.selectNFT);
+  const [state, setState] = useState<number>(State.tokenizeAsset);
   // Number of retrieved NFTs (used for pagination)
   const [numOSNFTs, setNumOSNFTs] = useState<number>(0);
   // List of ERC721 NFTs
@@ -44,6 +45,10 @@ export default function Create() {
   const [loanCompleted, setLoanCompleted] = useState<number>(
     new Date().setDate(new Date().getDate() + 7)
   );
+  // SteamID
+  const [steamID, setSteamID] = useState("");
+  const [inventory, setInventory] = useState("");
+  const [selectedAsset, setSelectedAsset] = useState(null);
 
   /**
    * Renders button based on current state
@@ -53,6 +58,12 @@ export default function Create() {
     if (!address) {
       // Not authenticated
       return <button onClick={() => unlock()}>Unlock</button>;
+    } else if(state === State.tokenizeAsset && !steamID) {
+      // Not connected to Steam
+      return <button onClick={() => setSteamID("hello")} >Steam Connection Required</button>
+    } else if(state === State.tokenizeAsset) {
+      // Inventory shown and no item selected
+      return <button disabled>Select an Asset to Tokenize</button>
     } else if (state === State.selectNFT && selected) {
       // NFT selected
       return (
@@ -89,6 +100,23 @@ export default function Create() {
   }
 
   /**
+   * Loads the CS:GO Steam Inventory for a user
+   * @param {String} The Steam-64 ID
+   * @returns {Object[]} CS:GO Items that are permitted for lending
+   */
+  async function loadInventory(steamID: String): Promise<void> {
+      setLoading(true);
+
+      try {
+        const response = await axios.get(`http://127.0.0.1:8000/list/${steamID}/`);
+        const data = response.data;
+        setInventory(data);
+      } catch (error) {
+        toast.error("Error when fetching the inventory.");
+      }
+  }
+
+  /**
    * Collects ERC721 NFTs from OpenSea API
    */
   async function collectNFTs(): Promise<void> {
@@ -100,10 +128,8 @@ export default function Create() {
         `https://goerli-api.opensea.io/api/v1/assets?owner=${address}&order_direction=desc&offset=${numOSNFTs}&limit=9`
       );
       setNumOSNFTs(response.data.assets.length); // Update number of retrieved NFTs
-      // Update ERC721 nfts
       setNFTList([...NFTList, ...filter721(response.data.assets)]);
     } catch {
-      // Toast error if retrieval fails
       toast.error("Error when collecting wallet NFT's.");
     }
 
@@ -142,23 +168,38 @@ export default function Create() {
     setLoading(false); // Toggle loading
   }
 
-  // -> Lifecycle: on address update
+  // Collect NFTs if authenticated
   useEffect(() => {
-    // Collect NFTs if authenticated
     if (address) collectNFTs();
   }, [address]);
+
+  // Load the Steam inventory when connected to Steam
+  useEffect(() => {
+    if(steamID) loadInventory(steamID);
+  }, [steamID]);
 
   return (
     <Layout>
       <div className="sizer">
         <div className={styles.create}>
-          {/* Create page title */}
           <h1>Create loan</h1>
-          <p>Select an NFT and choose your terms.</p>
+          <p>Tokenize your skins and apply for a loan</p>
 
           <div className={styles.create__action}>
             {/* Action card phases */}
             <div className={styles.create__action_phase}>
+
+              {/* Tokenize */}
+              <div
+                className={
+                  state === State.tokenizeAsset
+                    ? styles.create__action_active
+                    : undefined
+                }
+              >
+                <span>Tokenize</span>
+              </div>
+
               {/* Select NFT */}
               <div
                 className={
@@ -167,7 +208,7 @@ export default function Create() {
                     : undefined
                 }
               >
-                <span>Select NFT</span>
+                <span>Create Loan</span>
               </div>
 
               {/* Set Terms */}
@@ -178,7 +219,7 @@ export default function Create() {
                     : undefined
                 }
               >
-                <span>Set Terms</span>
+                <span>Confirm Terms</span>
               </div>
             </div>
 
@@ -234,6 +275,9 @@ export default function Create() {
                       <CreateLoadingNFTs />
                     ) : null}
                   </div>
+                ) : state === State.tokenizeAsset ? (
+                  !steamID ? <CreateUnauthenticatedSteam/> :
+                  <p>Select Item</p>
                 ) : (
                   // Enable user input of terms
                   <div className={styles.create__action_terms}>
@@ -318,7 +362,22 @@ export default function Create() {
 }
 
 /**
- * State when user has not authenticated
+ * State when user has not authenticated with Steam
+ * @returns {ReactElement}
+ */
+function CreateUnauthenticatedSteam(): ReactElement {
+  return (
+    <div className={styles.create__action_content_unauthenticated}>
+      <img src="/vectors/unlock.svg" height="30px" alt="Unlock" />
+      <h3>Connect with Steam</h3>
+      <p>Please connect with Steam to display your skins.</p>
+      {/* TODO: Steam Sign In Button */}
+    </div>
+  );
+}
+
+/**
+ * State when user has not authenticated with a Wallet
  * @returns {ReactElement}
  */
 function CreateUnauthenticated(): ReactElement {
@@ -352,7 +411,7 @@ function NoOwnedNFTs(): ReactElement {
     <div className={styles.create__action_content_unauthenticated}>
       <img src="/vectors/empty.svg" alt="Empty" height="30px" />
       <h3>No NFTs in wallet.</h3>
-      <p>Please mint NFTs before trying to create loan.</p>
+      <p>Please tokenize your skin before trying to create loan.</p>
     </div>
   );
 }
