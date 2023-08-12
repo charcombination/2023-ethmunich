@@ -3,6 +3,11 @@ const path = require('path');
 const SteamUser = require('steam-user');
 const SteamCommunity = require('steamcommunity');
 const TradeOfferManager = require('steam-tradeoffer-manager');
+const SteamID = require('steamid');
+
+const auth = {
+  provideTotp: undefined,
+};
 
 const {
   STEAM_USERNAME, STEAM_PASSWORD, STEAM_API_KEY, STEAM_DOMAIN,
@@ -39,6 +44,13 @@ const finalizeTrade = (offer) => {
 
 client.logOn(logonOptions);
 
+client.on('steamGuard', (domain, callback) => {
+  console.log('Awaiting steam guard code');
+  new Promise((resolve) => {
+    auth.provideTotp = resolve;
+  }).then((totp) => callback(totp));
+});
+
 client.on('loggedOn', () => {
   console.log('Logged into Steam successfully.');
 });
@@ -67,6 +79,8 @@ manager.on('newOffer', (offer) => {
   }
 });
 
+const convertToSteamId = (partnerId) => SteamID.fromIndividualAccountID(partnerId);
+
 module.exports = {
-  client, manager,
+  client, manager, community, convertToSteamId, auth,
 };

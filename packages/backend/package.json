@@ -37,6 +37,7 @@
     "steam-tradeoffer-manager": "^2.10.6",
     "steam-user": "^4.29.1",
     "steamcommunity": "^3.46.1",
+    "steamid": "^2.0.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
