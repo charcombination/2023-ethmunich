@@ -1,14 +1,18 @@
-pragma solidity ^0.8.19;
+//SPDX-License-Identifier: GPL-3.0-or-later
+pragma solidity ^0.8.0;
+
+// ============ Imports ============
 
 import "abdk-libraries-solidity/ABDKMath64x64.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
-/* Oracle interface for the Gelato-updated contract
-interface IOracle {
-    function lastUpdated() external view returns(uint256);
-    function updatePrice(uint256 newPrice) external;
-    function getPrice() external view returns (uint256);  // Assuming this function exists in the oracle contract
-}*/
+/**
+ * @title PawnBank: NFT-collateralized lending
+ * @author Anish Agnihotri
+ * @dev Completed loans are represented as tokenOwner = 0x0 to prevent
+ *      errors w.r.t stack too deep (too large of a struct to include a bool)
+ * @dev Unlike original spec., lenders are paid for only active duration (D')
+ */
 contract PawnBank {
   // ============ Structs ============
 
@@ -38,16 +42,10 @@ contract PawnBank {
     uint256 historicInterest;
     // Timestamp of loan completion
     uint256 loanCompleteTime;
-         
-   
-
   }
 
   // ============ Mutable storage ============
-// Constructor (if it doesn't exist, add one)
-    constructor(address _oracleAddress) {
-        oracle = IOracle(_oracleAddress);
-    }
+
   // Number of loans issued
   uint256 public numLoans;
   // Mapping of loan number to loan struct
@@ -161,12 +159,6 @@ contract PawnBank {
 
     // past lender interest + current accrued interest
     return loan.historicInterest + calculateInterestAccrued(_loanId, _future);
-  }
-
-  // price finction
-  function getItemPrice() external view returns (uint256) {
-        uint256 price = oracle.getPrice();
-        return price;
   }
 
   /**

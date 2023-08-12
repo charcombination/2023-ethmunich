@@ -17,12 +17,21 @@ export default {
   solidity: "0.8.4",
   networks: {
     // Fork mainnet for testing
-    hardhat: {
+   /* hardhat: {
       forking: {
         url: `https://eth-mainnet.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
         blockNumber: 12864983,
       },
-    }
+    },*/
+    // Deploy to Rinkeby
+    rinkeby: {
+      url: `https://eth-rinkeby.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
+      accounts: [`${RINKEBY_DEPLOY_PK}`],
+    },
+    sepolia: {
+      url: `https://eth-sepolia.g.alchemy.com/v2/${ALCHEMY_API_KEY}`,
+      accounts: [`${RINKEBY_DEPLOY_PK}`],
+    },
   },
   // Gas reporting
   gasReporter: {

@@ -12,6 +12,12 @@ async function main(): Promise<void> {
   const pawnbank = await PawnBank.deploy();
 
   console.log("Deployed PawnBank address:", pawnbank.address);
+
+  // Deploy MintNFT
+  const NFT = await ethers.getContractFactory("NFT");
+  const nftmint = await NFT.deploy();
+
+  console.log("Deployed NFTMint ", NFT);
 }
 
 main()
