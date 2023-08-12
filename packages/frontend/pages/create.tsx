@@ -5,9 +5,11 @@ import { toast } from "react-toastify"; // Toast notifications
 import Layout from "@components/Layout"; // Layout wrapper
 import DatePicker from "react-datepicker"; // Datepicker
 import LoanCard from "@components/LoanCard"; // Component: Loancard
+import Inventory from "@components/Inventory"; // Component: Loancard
 import styles from "@styles/pages/Create.module.scss"; // Component styles
 import { ReactElement, useEffect, useState } from "react"; // State management
 import { NextRouter, useRouter } from "next/dist/client/router"; // Next router
+import inventoryMockData from './output_mock.json';
 
 /**
  * Selection states
@@ -47,8 +49,10 @@ export default function Create() {
   );
   // SteamID
   const [steamID, setSteamID] = useState("");
-  const [inventory, setInventory] = useState("");
+  const [inventory, setInventory] = useState([]);
   const [selectedAsset, setSelectedAsset] = useState(null);
+  const [tradeToken, setTradeToken] = useState("8nUPXs46");
+  const [tradeOfferLink, setTradeOfferLink] = useState<String | null>(null);
 
   /**
    * Renders button based on current state
@@ -61,9 +65,15 @@ export default function Create() {
     } else if(state === State.tokenizeAsset && !steamID) {
       // Not connected to Steam
       return <button onClick={() => setSteamID("hello")} >Steam Connection Required</button>
-    } else if(state === State.tokenizeAsset) {
+    } else if(state === State.tokenizeAsset && !selectedAsset) {
       // Inventory shown and no item selected
       return <button disabled>Select an Asset to Tokenize</button>
+    } else if(state === State.tokenizeAsset && !loading) {
+      // Initiate trade offer and setLoading
+      return <button onClick={() => requestTradeOffer(selectedAsset.id, address)}>Transfer "{selectedAsset.description.name}" to Tokenize</button>
+    } else if (state === State.tokenizeAsset) {
+      // Bot is creating a trade offer
+      return <button disabled>Creating offer, please wait...</button>
     } else if (state === State.selectNFT && selected) {
       // NFT selected
       return (
@@ -100,21 +110,43 @@ export default function Create() {
   }
 
   /**
+   * Initiates the trade offer to tokenize the asset
+   */
+  async function requestTradeOffer(assetID: number, addr: String): Promise<void> {
+    setLoading(true);
+
+    try {
+      const response = await axios.get(`http://127.0.0.1:3011/init-trade/${assetID}/${addr}`);
+      setTradeOfferLink(`https://steamcommunity.com/tradeoffer/${response.data}`);
+    } catch (error) {
+      toast.error("Error when fetching the inventory.");
+    }
+
+    setLoading(false);
+  }
+
+  /**
    * Loads the CS:GO Steam Inventory for a user
    * @param {String} The Steam-64 ID
    * @returns {Object[]} CS:GO Items that are permitted for lending
    */
   async function loadInventory(steamID: String): Promise<void> {
-      setLoading(true);
+      // setLoading(true);
 
-      try {
-        const response = await axios.get(`http://127.0.0.1:8000/list/${steamID}/`);
-        const data = response.data;
-        setInventory(data);
-      } catch (error) {
-        toast.error("Error when fetching the inventory.");
-      }
+      // 
+      setInventory(inventoryMockData.assets);
+
+      // try {
+      //   const response = await axios.get(`http://127.0.0.1:3011/items/${steamID}/`);
+      //   const data = response.data;
+      //   setInventory(data);
+      // } catch (error) {
+      //   toast.error("Error when fetching the inventory.");
+      // }
+
+      // setLoading(false);
   }
+
 
   /**
    * Collects ERC721 NFTs from OpenSea API
@@ -277,7 +309,9 @@ export default function Create() {
                   </div>
                 ) : state === State.tokenizeAsset ? (
                   !steamID ? <CreateUnauthenticatedSteam/> :
-                  <p>Select Item</p>
+                  !inventory[0] ? <CreateLoadingSkins/> :
+                  <Inventory inventory={inventory} filter={"4"} selected={selectedAsset} onSelectAsset={(asset: any) => {setSelectedAsset(asset)}
+                  } />
                 ) : (
                   // Enable user input of terms
                   <div className={styles.create__action_terms}>
@@ -347,7 +381,6 @@ export default function Create() {
                   </div>
                 )
               ) : (
-                // If user is unauthenticated
                 <CreateUnauthenticated />
               )}
             </div>
@@ -386,6 +419,18 @@ function CreateUnauthenticated(): ReactElement {
       <img src="/vectors/unlock.svg" height="30px" alt="Unlock" />
       <h3>Unlock wallet</h3>
       <p>Please connect your wallet to get started.</p>
+    </div>
+  );
+}
+
+/**
+ * State when CS:GO assets are loading
+ * @returns {ReactElement}
+ */
+function CreateLoadingSkins(): ReactElement {
+  return (
+    <div className={styles.create__action_loading}>
+      <span>Loading Skins...</span>
     </div>
   );
 }

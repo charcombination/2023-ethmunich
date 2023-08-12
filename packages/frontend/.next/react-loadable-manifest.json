@@ -1,0 +1,464 @@
+{
+  "../node_modules/bnc-onboard/dist/esm/alphawallet-48de70ca.js -> ./providerEngine-413ddff7.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/providerEngine-413ddff7.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_providerEngine-413ddff7_js-_cd200.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/authereum-d17fd2eb.js -> authereum": {
+    "id": "./node_modules/authereum/dist/index.js",
+    "files": [
+      "static/chunks/node_modules_authereum_dist_index_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/cobovault-28f5eab2.js -> ./providerEngine-413ddff7.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/providerEngine-413ddff7.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_providerEngine-413ddff7_js-_cd201.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/cobovault-28f5eab2.js -> ethereumjs-tx": {
+    "id": "./node_modules/ethereumjs-tx/dist/index.js",
+    "files": [
+      "static/chunks/node_modules_ethereumjs-tx_dist_index_js-_8d231.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/fortmatic-4fe9359d.js -> fortmatic": {
+    "id": "./node_modules/fortmatic/dist/cjs/fortmatic.js",
+    "files": [
+      "static/chunks/node_modules_fortmatic_dist_cjs_fortmatic_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/frame-a3f4e5a5.js -> eth-provider": {
+    "id": "./node_modules/eth-provider/browser.js",
+    "files": [
+      "static/chunks/node_modules_eth-provider_browser_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/gnosis-19b90e57.js -> @gnosis.pm/safe-apps-provider": {
+    "id": "./node_modules/@gnosis.pm/safe-apps-provider/dist/index.js",
+    "files": [
+      "static/chunks/node_modules_gnosis_pm_safe-apps-provider_dist_index_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/gnosis-19b90e57.js -> @gnosis.pm/safe-apps-sdk": {
+    "id": "./node_modules/@gnosis.pm/safe-apps-sdk/dist/src/index.js",
+    "files": [
+      "static/chunks/node_modules_gnosis_pm_safe-apps-sdk_dist_src_index_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/huobiwallet-0348988e.js -> ./providerEngine-413ddff7.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/providerEngine-413ddff7.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_providerEngine-413ddff7_js-_cd200.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/imtoken-cc5e15c9.js -> ./providerEngine-413ddff7.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/providerEngine-413ddff7.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_providerEngine-413ddff7_js-_cd200.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/index-4a48b5ea.js -> ./hd-wallet-6fc43476.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/hd-wallet-6fc43476.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_hd-wallet-6fc43476_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/index-4a48b5ea.js -> ./providerEngine-413ddff7.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/providerEngine-413ddff7.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_providerEngine-413ddff7_js-_cd200.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/index-4a48b5ea.js -> @shapeshiftoss/hdwallet-core": {
+    "id": "./node_modules/@shapeshiftoss/hdwallet-core/dist/index.js",
+    "files": [
+      "static/chunks/node_modules_shapeshiftoss_hdwallet-core_dist_index_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/index-4a48b5ea.js -> @shapeshiftoss/hdwallet-keepkey-webusb": {
+    "id": "./node_modules/@shapeshiftoss/hdwallet-keepkey-webusb/dist/index.js",
+    "files": [
+      "static/chunks/node_modules_shapeshiftoss_hdwallet-keepkey-webusb_dist_index_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/lattice-a9225c21.js -> ./providerEngine-413ddff7.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/providerEngine-413ddff7.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_providerEngine-413ddff7_js-_cd200.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/lattice-a9225c21.js -> eth-lattice-keyring": {
+    "id": "./node_modules/eth-lattice-keyring/index.js",
+    "files": [
+      "static/chunks/node_modules_eth-lattice-keyring_index_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/lattice-a9225c21.js -> ethereumjs-tx": {
+    "id": "./node_modules/ethereumjs-tx/dist/index.js",
+    "files": [
+      "static/chunks/node_modules_ethereumjs-tx_dist_index_js-_8d230.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/ledger-e33a98e5.js -> ./hd-wallet-6fc43476.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/hd-wallet-6fc43476.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_hd-wallet-6fc43476_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/ledger-e33a98e5.js -> ./providerEngine-413ddff7.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/providerEngine-413ddff7.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_providerEngine-413ddff7_js-_cd200.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/ledger-e33a98e5.js -> @ledgerhq/hw-app-eth": {
+    "id": "./node_modules/@ledgerhq/hw-app-eth/lib-es/Eth.js",
+    "files": [
+      "static/chunks/node_modules_ledgerhq_hw-app-eth_lib-es_Eth_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/ledger-e33a98e5.js -> @ledgerhq/hw-transport-u2f": {
+    "id": "./node_modules/@ledgerhq/hw-transport-u2f/lib-es/TransportU2F.js",
+    "files": [
+      "static/chunks/node_modules_ledgerhq_hw-transport-u2f_lib-es_TransportU2F_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/ledger-e33a98e5.js -> @ledgerhq/hw-transport-webusb": {
+    "id": "./node_modules/@ledgerhq/hw-transport-webusb/lib-es/TransportWebUSB.js",
+    "files": [
+      "static/chunks/node_modules_ledgerhq_hw-transport-webusb_lib-es_TransportWebUSB_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/ledger-e33a98e5.js -> buffer": {
+    "id": "./node_modules/buffer/index.js",
+    "files": [
+      "static/chunks/node_modules_buffer_index_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/ledger-e33a98e5.js -> eth-sig-util": {
+    "id": "./node_modules/eth-sig-util/dist/index.js",
+    "files": [
+      "static/chunks/node_modules_eth-sig-util_dist_index_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/ledger-e33a98e5.js -> ethereumjs-tx": {
+    "id": "./node_modules/ethereumjs-tx/dist/index.js",
+    "files": [
+      "static/chunks/node_modules_ethereumjs-tx_dist_index_js-_8d230.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/ledger-e33a98e5.js -> ethereumjs-util": {
+    "id": "./node_modules/ethereumjs-util/dist.browser/index.js",
+    "files": [
+      "static/chunks/node_modules_ethereumjs-util_dist_browser_index_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/mykey-d08cad20.js -> ./providerEngine-413ddff7.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/providerEngine-413ddff7.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_providerEngine-413ddff7_js-_cd200.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./alphawallet-48de70ca.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/alphawallet-48de70ca.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_alphawallet-48de70ca_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./atoken-68fc48b8.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/atoken-68fc48b8.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_atoken-68fc48b8_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./authereum-d17fd2eb.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/authereum-d17fd2eb.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_authereum-d17fd2eb_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./balance-55ba2eda.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/balance-55ba2eda.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_balance-55ba2eda_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./bitpie-a7acfe0e.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/bitpie-a7acfe0e.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_bitpie-a7acfe0e_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./cobovault-28f5eab2.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/cobovault-28f5eab2.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_cobovault-28f5eab2_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./coinbase-ff2019aa.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/coinbase-ff2019aa.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_coinbase-ff2019aa_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./connect-945daaba.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/connect-945daaba.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_connect-945daaba_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./dcent-aad7ab41.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/dcent-aad7ab41.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_dcent-aad7ab41_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./detectedwallet-be2637be.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/detectedwallet-be2637be.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_detectedwallet-be2637be_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./fortmatic-4fe9359d.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/fortmatic-4fe9359d.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_fortmatic-4fe9359d_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./frame-a3f4e5a5.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/frame-a3f4e5a5.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_frame-a3f4e5a5_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./gnosis-19b90e57.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/gnosis-19b90e57.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_gnosis-19b90e57_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./huobiwallet-0348988e.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/huobiwallet-0348988e.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_huobiwallet-0348988e_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./hyperpay-cb53c487.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/hyperpay-cb53c487.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_hyperpay-cb53c487_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./imtoken-cc5e15c9.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/imtoken-cc5e15c9.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_imtoken-cc5e15c9_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./index-4a48b5ea.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/index-4a48b5ea.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_index-4a48b5ea_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./lattice-a9225c21.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/lattice-a9225c21.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_lattice-a9225c21_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./ledger-e33a98e5.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/ledger-e33a98e5.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_ledger-e33a98e5_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./liquality-0adca826.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/liquality-0adca826.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_liquality-0adca826_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./meetone-10714292.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/meetone-10714292.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_meetone-10714292_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./metamask-61289acd.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/metamask-61289acd.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_metamask-61289acd_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./mykey-d08cad20.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/mykey-d08cad20.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_mykey-d08cad20_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./network-d7fdf0ca.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/network-d7fdf0ca.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_network-d7fdf0ca_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./opera-b328ed05.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/opera-b328ed05.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_opera-b328ed05_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./opera-touch-269c38a9.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/opera-touch-269c38a9.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_opera-touch-269c38a9_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./ownbit-b933af7e.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/ownbit-b933af7e.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_ownbit-b933af7e_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./portis-20da3305.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/portis-20da3305.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_portis-20da3305_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./status-b68b10b3.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/status-b68b10b3.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_status-b68b10b3_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./tokenpocket-3b49fdba.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/tokenpocket-3b49fdba.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_tokenpocket-3b49fdba_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./torus-a3ead2fc.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/torus-a3ead2fc.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_torus-a3ead2fc_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./trezor-79b1a639.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/trezor-79b1a639.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_trezor-79b1a639_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./trust-366bacfe.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/trust-366bacfe.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_trust-366bacfe_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./wallet-connect-b01cbd9e.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/wallet-connect-b01cbd9e.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_wallet-connect-b01cbd9e_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./wallet-io-4db3dbea.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/wallet-io-4db3dbea.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_wallet-io-4db3dbea_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./wallet-link-b78ddc0e.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/wallet-link-b78ddc0e.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_wallet-link-b78ddc0e_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/onboard-584c044d.js -> ./xdefi-041b1a64.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/xdefi-041b1a64.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_xdefi-041b1a64_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/portis-20da3305.js -> @portis/web3": {
+    "id": "./node_modules/@portis/web3/umd/index.js",
+    "files": [
+      "static/chunks/node_modules_portis_web3_umd_index_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/torus-a3ead2fc.js -> @toruslabs/torus-embed": {
+    "id": "./node_modules/@toruslabs/torus-embed/dist/torus.cjs.js",
+    "files": [
+      "static/chunks/node_modules_toruslabs_torus-embed_dist_torus_cjs_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/trezor-79b1a639.js -> ./hd-wallet-6fc43476.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/hd-wallet-6fc43476.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_hd-wallet-6fc43476_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/trezor-79b1a639.js -> ./providerEngine-413ddff7.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/providerEngine-413ddff7.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_providerEngine-413ddff7_js-_cd200.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/trezor-79b1a639.js -> ethereumjs-tx": {
+    "id": "./node_modules/ethereumjs-tx/dist/index.js",
+    "files": [
+      "static/chunks/node_modules_ethereumjs-tx_dist_index_js-_8d230.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/trezor-79b1a639.js -> ethereumjs-util": {
+    "id": "./node_modules/ethereumjs-util/dist.browser/index.js",
+    "files": [
+      "static/chunks/node_modules_ethereumjs-util_dist_browser_index_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/trezor-79b1a639.js -> trezor-connect": {
+    "id": "./node_modules/trezor-connect/lib/index.js",
+    "files": [
+      "static/chunks/node_modules_trezor-connect_lib_index_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/trust-366bacfe.js -> ./providerEngine-413ddff7.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/providerEngine-413ddff7.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_providerEngine-413ddff7_js-_cd200.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/wallet-connect-b01cbd9e.js -> ./providerEngine-413ddff7.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/providerEngine-413ddff7.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_providerEngine-413ddff7_js-_cd200.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/wallet-connect-b01cbd9e.js -> @walletconnect/web3-provider": {
+    "id": "./node_modules/@walletconnect/web3-provider/dist/cjs/index.js",
+    "files": [
+      "static/chunks/node_modules_walletconnect_web3-provider_dist_cjs_index_js.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/wallet-io-4db3dbea.js -> ./providerEngine-413ddff7.js": {
+    "id": "./node_modules/bnc-onboard/dist/esm/providerEngine-413ddff7.js",
+    "files": [
+      "static/chunks/node_modules_bnc-onboard_dist_esm_providerEngine-413ddff7_js-_cd200.js"
+    ]
+  },
+  "../node_modules/bnc-onboard/dist/esm/wallet-link-b78ddc0e.js -> walletlink": {
+    "id": "./node_modules/walletlink/dist/index.js",
+    "files": [
+      "static/chunks/node_modules_walletlink_dist_index_js.js"
+    ]
+  },
+  "../node_modules/next/dist/client/next-dev.js -> ./dev/noop": {
+    "id": "./node_modules/next/dist/client/dev/noop.js",
+    "files": [
+      "static/chunks/node_modules_next_dist_client_dev_noop_js.js"
+    ]
+  }
+}
