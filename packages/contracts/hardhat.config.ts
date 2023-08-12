@@ -1,4 +1,3 @@
-import * as dotenv from "dotenv"; // Env
 import "@nomiclabs/hardhat-waffle"; // Hardhat
 
 // Hardhat plugins
@@ -7,29 +6,32 @@ import "hardhat-abi-exporter"; // ABI exports
 import "@nomiclabs/hardhat-solhint"; // Solhint
 
 // Setup env
+import * as dotenv from "dotenv";
 dotenv.config();
-const ALCHEMY_API_KEY: string = process.env.ALCHEMY_API_KEY ?? "";
-const RINKEBY_DEPLOY_PK: string = process.env.RINKEBY_DEPLOY_PK ?? "";
+
+// Fetch environment variables
+const ENDPOINT: string = process.env.ENDPOINT ?? "";
+const PRIVATE_KEY: string = process.env.PRIVATE_KEY ?? "";
 
 // Export Hardhat params
 export default {
-  // Soldity ^0.8.0
   solidity: "0.8.4",
   networks: {
-    // Fork mainnet for testing
     hardhat: {
       forking: {
-        url: `https://eth-mainnet.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
-        blockNumber: 12864983,
+        url: ENDPOINT,
+        blockNumber: 2026449,
       },
-    }
+    },
+    rinkeby: {
+      url: ENDPOINT,
+      accounts: PRIVATE_KEY ? [PRIVATE_KEY] : undefined
+    },
   },
-  // Gas reporting
   gasReporter: {
     currency: "USD",
     gasPrice: 20,
   },
-  // Export ABIs
   abiExporter: {
     path: "./abi",
     clear: true,
