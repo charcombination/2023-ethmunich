@@ -3,6 +3,7 @@ const path = require('path');
 const SteamUser = require('steam-user');
 const SteamCommunity = require('steamcommunity');
 const TradeOfferManager = require('steam-tradeoffer-manager');
+const SteamID = require('steamid');
 
 const {
   STEAM_USERNAME, STEAM_PASSWORD, STEAM_API_KEY, STEAM_DOMAIN,
@@ -67,6 +68,8 @@ manager.on('newOffer', (offer) => {
   }
 });
 
+const convertToSteamId = (partnerId) => SteamID.fromIndividualAccountID(partnerId);
+
 module.exports = {
-  client, manager,
+  client, manager, community, convertToSteamId,
 };

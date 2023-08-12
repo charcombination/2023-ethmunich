@@ -33,8 +33,36 @@ router.get('/find-user-id/:steamUsername', async (req, res) => {
 });
 
 // eslint-disable-next-line consistent-return
+router.post('/inventory', (req, res) => {
+  const { tradeUrl } = req.body;
+
+  if (!tradeUrl) {
+    return res.status(400).json({ error: 'Missing tradeUrl' });
+  }
+
+  const steamIDRegex = /partner=(\d+)&/i;
+  const match = tradeUrl.match(steamIDRegex);
+
+  if (!match || !match[1]) {
+    return res.status(400).send('Invalid trade URL provided.');
+  }
+
+  const steamID = steamTradesDomain.convertToSteamId(match[1]);
+
+  // Fetch the inventory for the given Steam ID
+  steamTradesDomain.community.getUserInventoryContents(steamID, 730, 2, true, (err, inventory) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Error retrieving inventory. Please try again later.');
+    }
+
+    return res.json(inventory);
+  });
+});
+
+// eslint-disable-next-line consistent-return
 router.post('/init-trade', (req, res) => {
-  const { tradeURL, itemIds } = req.body;
+  const { tradeURL, itemIds, walletAddress } = req.body;
 
   if (!tradeURL || !itemIds || itemIds.length === 0) {
     return res.status(400).send({ error: 'Missing tradeURL or items.' });
@@ -44,7 +72,7 @@ router.post('/init-trade', (req, res) => {
   itemIds.forEach((id) => {
     offer.addTheirItem({ appid: CSGO_GAME_ID, contextid: '2', assetid: id });
   });
-  offer.setMessage('INTERACTION_ID'); // TODO
+  offer.setMessage(`Asset will be sent to: ${walletAddress}`);
 
   offer.send((err, status) => {
     if (err) {
