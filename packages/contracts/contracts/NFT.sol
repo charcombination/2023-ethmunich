@@ -2,11 +2,11 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Metadata.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract NFT is ERC721Enumerable, Ownable, ERC721Metadata {
+contract NFT is ERC721Enumerable, ERC721URIStorage, Ownable {
   using Counters for Counters.Counter;
   Counters.Counter private _tokenIdCounter;
 
@@ -48,10 +48,6 @@ contract NFT is ERC721Enumerable, Ownable, ERC721Metadata {
     _burnRequests[tokenId].isRequested = true;
     _burnRequests[tokenId].tradeLink = tradeLink;
 
-    // Notify the contract owner using the Push Protocol. This is an abstract call,
-    // replace `notifyOwner` with actual implementation.
-    notifyOwner(msg.sender, tokenId, tradeLink);
-
     emit BurnRequestCreated(msg.sender, tokenId, tradeLink);
   }
 
@@ -63,10 +59,32 @@ contract NFT is ERC721Enumerable, Ownable, ERC721Metadata {
     emit BurnRequestExecuted(tokenId);
   }
 
-  function _burn(uint256 tokenId) internal override {
+  function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
     super._burn(tokenId);
 
     // Remove the burn request after burning
     delete _burnRequests[tokenId];
+  }
+
+  function _beforeTokenTransfer(
+    address from,
+    address to,
+    uint256 tokenId
+  ) internal override(ERC721, ERC721Enumerable) {
+    super._beforeTokenTransfer(from, to, tokenId);
+  }
+
+  function supportsInterface(
+    bytes4 interfaceId
+  ) public view override(ERC721, ERC721Enumerable) returns (bool) {
+    // Delegate call to both ERC721 and ERC721Enumerable's supportsInterface
+    return super.supportsInterface(interfaceId);
+  }
+
+  function tokenURI(
+    uint256 tokenId
+  ) public view override(ERC721, ERC721URIStorage) returns (string memory) {
+    // Use the version from ERC721URIStorage
+    return super.tokenURI(tokenId);
   }
 }
