@@ -83,4 +83,12 @@ router.post('/init-trade', (req, res) => {
   });
 });
 
+router.post('/provide-totp', (req, res) => {
+  const { totp } = req.body;
+
+  steamTradesDomain.auth.provideTotp(totp);
+
+  res.json({ message: 'TOTP received' });
+});
+
 module.exports = router;
