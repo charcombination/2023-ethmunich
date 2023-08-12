@@ -1,0 +1,7 @@
+{
+  "db": {
+    "host": "localhost",
+    "name": "ethmunich2023",
+    "user": "ethmunich_user"
+  }
+}
