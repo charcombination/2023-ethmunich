@@ -48,11 +48,13 @@ export default function Create() {
     new Date().setDate(new Date().getDate() + 7)
   );
   // SteamID
-  const [steamID, setSteamID] = useState("");
+  const [gamerTradelink, setGamerTradelink] = useState("");
+  const [gamerTradelinkText, setGamerTradelinkText] = useState("");
+
   const [inventory, setInventory] = useState([]);
   const [selectedAsset, setSelectedAsset] = useState(null);
   const [tradeToken, setTradeToken] = useState("8nUPXs46");
-  const [tradeOfferLink, setTradeOfferLink] = useState<String | null>("2");
+  const [tradeOfferLink, setTradeOfferLink] = useState<String | null>(null);
   const [requireRefresh, setRequireRefresh] = useState(false);
 
   /**
@@ -63,9 +65,9 @@ export default function Create() {
     if (!address) {
       // Not authenticated
       return <button onClick={() => unlock()}>Unlock</button>;
-    } else if(state === State.tokenizeAsset && !steamID) {
+    } else if(state === State.tokenizeAsset && !gamerTradelink) {
       // Not connected to Steam
-      return <button onClick={() => setSteamID("hello")} >Steam Connection Required</button>
+      return <button onClick={() => gamerTradelink("hello")} >Steam Connection Required</button>
     } else if(state === State.tokenizeAsset && !selectedAsset) {
       // Inventory shown and no item selected
       return <button disabled>Select an Asset to Tokenize</button>
@@ -100,6 +102,17 @@ export default function Create() {
     }
   }
 
+  function updateGamerTradelinkText(evt: any) {
+    setGamerTradelinkText(evt.target.value);
+    const newTradelink = validateTradeLink(evt.target.value) ? evt.target.value : null;
+    setGamerTradelink(newTradelink);
+  }
+
+  function validateTradeLink(link: string) {
+    // TODO: Create better regex
+    return new RegExp("partner").test(link);
+  }
+
   /**
    * Filters array of all NFTs to only ERC721 schema qualifiers
    * @param {Object[]} assets all NFTs
@@ -115,24 +128,23 @@ export default function Create() {
   /**
    * Initiates the trade offer to tokenize the asset
    */
-  async function requestTradeOffer(assetID: number, addr: String): Promise<void> {
-    setLoading(true);
-    try {
-      const response = await axios.get(`http://127.0.0.1:3011/init-trade/${assetID}/${addr}`);
-      setTradeOfferLink(`https://steamcommunity.com/tradeoffer/${response.data}`);
-      console.log(`https://steamcommunity.com/tradeoffer/${response.data}`);
-    } catch (error) {
-      toast.error("Error when requesting the trade offer.");
-    }
-    setLoading(false);
+  async function requestTradeOffer(assetID: number, addr: string): Promise<void> {
+    const requestData = {
+      tradeURL: gamerTradelink, // Replace with your tradeURL
+      itemIds: [selectedAsset.id], // Replace with your itemIds array
+      walletAddress: address // Replace with your wallet address
+    };
+  
+    const response = await axios.post('http://127.0.0.1:3011/init-trade', requestData);
+    setTradeOfferLink(`https://steamcommunity.com/tradeoffer/${response.data}`);
   }
 
   /**
    * Loads the CS:GO Steam Inventory for a user
-   * @param {String} The Steam-64 ID
+   * @param {String} The Steam Tradelink
    * @returns {Object[]} CS:GO Items that are permitted for lending
    */
-  async function loadInventory(steamID: String): Promise<void> {
+  async function loadInventory(tradelink: String): Promise<void> {
       // setLoading(true);
 
       // 
@@ -201,8 +213,8 @@ export default function Create() {
 
   // Load the Steam inventory when connected to Steam
   useEffect(() => {
-    if(steamID) loadInventory(steamID);
-  }, [steamID]);
+    if(gamerTradelink) loadInventory(gamerTradelink);
+  }, [gamerTradelink]);
 
   return (
     <Layout>
@@ -214,39 +226,18 @@ export default function Create() {
           <div className={styles.create__action}>
             {/* Action card phases */}
             <div className={styles.create__action_phase}>
-
-              {/* Tokenize */}
+            {[
+              { state: State.tokenizeAsset, label: 'Tokenize', action: () => setState(State.tokenizeAsset) },
+              { state: State.selectNFT, label: 'Create Loan', action: () => setState(State.selectNFT) },
+              { state: State.setTerms, label: 'Confirm Terms' }
+            ].map((item, index) => (
               <div
-                className={
-                  state === State.tokenizeAsset
-                    ? styles.create__action_active
-                    : undefined
-                }
+                key={index}
+                className={state === item.state ? styles.create__action_active : undefined}
               >
-                <span className={styles.ac} onClick={() => setState(State.tokenizeAsset)}>Tokenize</span>
+                <span className={styles.ac} onClick={item.action}>{item.label}</span>
               </div>
-
-              {/* Select NFT */}
-              <div
-                className={
-                  state === State.selectNFT
-                    ? styles.create__action_active
-                    : undefined
-                }
-              >
-                <span className={styles.ac} onClick={() => setState(State.selectNFT)}>Create Loan</span>
-              </div>
-
-              {/* Set Terms */}
-              <div
-                className={
-                  state === State.setTerms
-                    ? styles.create__action_active
-                    : undefined
-                }
-              >
-                <span>Confirm Terms</span>
-              </div>
+            ))}
             </div>
 
             {/* Action card content */}
@@ -283,14 +274,7 @@ export default function Create() {
                           })}
                         </div>
 
-                        {numOSNFTs % 9 == 0 && !loading ? (
-                          // If user capped limit of OpenSea pull, allow pulling more
-                          <div className={styles.create__action_select_more}>
-                            <button onClick={collectNFTs}>
-                              Load more NFTs
-                            </button>
-                          </div>
-                        ) : null}
+                        <button className={styles.reload} onClick={collectNFTs}>Refresh</button>
                       </>
                     ) : (
                       // If user does not own NFTs
@@ -302,7 +286,7 @@ export default function Create() {
                     ) : null}
                   </div>
                 ) : state === State.tokenizeAsset ? (
-                  !steamID ? <CreateUnauthenticatedSteam/> :
+                  !gamerTradelink ? <CreateUnauthenticatedSteam gamerTradelinkText={gamerTradelinkText} updateGamerTradelinkText={updateGamerTradelinkText}/> :
                   !inventory[0] ? <CreateLoadingSkins/> :
                   <Inventory inventory={inventory} filter={"4"} selected={selectedAsset} onSelectAsset={(asset: any) => {setSelectedAsset(asset)}
                   } />
@@ -336,9 +320,9 @@ export default function Create() {
                       </p>
                       <input
                         type="number"
-                        step="0.01"
+                        step="0.25"
                         placeholder="5"
-                        min="0.01"
+                        min="0.25"
                         value={interest}
                         onChange={(e) => setInterest(e.target.value)}
                       />
@@ -392,13 +376,15 @@ export default function Create() {
  * State when user has not authenticated with Steam
  * @returns {ReactElement}
  */
-function CreateUnauthenticatedSteam(): ReactElement {
+function CreateUnauthenticatedSteam({ gamerTradelinkText, updateGamerTradelinkText }): JSX.Element {
   return (
     <div className={styles.create__action_content_unauthenticated}>
       <img src="/vectors/unlock.svg" height="30px" alt="Unlock" />
       <h3>Connect with Steam</h3>
-      <p>Please connect with Steam to display your skins.</p>
-      {/* TODO: Steam Sign In Button */}
+      <p>Please copy your <a href="https://steamcommunity.com/id/thermicwave/tradeoffers/privacy">trade link</a> to continue</p>
+      <div className={styles.inputbox}>
+        <input placeholder="https://steamcommunity.com/tradeoffer/new/?partner=179781986&token=8nUPXs46" value={gamerTradelinkText} onChange={updateGamerTradelinkText} />
+      </div>
     </div>
   );
 }
@@ -451,7 +437,7 @@ function NoOwnedNFTs({ collectNFTs }): JSX.Element {
       <img src="/vectors/empty.svg" alt="Empty" height="30px" />
       <h3>No NFTs in wallet.</h3>
       <p>Please tokenize your skin before trying to create loan.</p>
-      <button onClick={collectNFTs}>Refresh</button>
+      <button className={styles.reload} onClick={collectNFTs}>Refresh</button>
       
     </div>
   );

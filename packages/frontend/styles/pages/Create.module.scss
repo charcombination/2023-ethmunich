@@ -1,21 +1,20 @@
 .create {
   text-align: center;
 
-  @keyframes spinner {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+  .reload {
+    background-color: #137E83;
+    border-radius: 6px;
+    border: none;
+    padding: 10px;
+    width: 150px;
+    color: white;
+    font-weight: bold;
+    margin-top: 18px;
+    transition: all 100ms;
   }
-  .loading_spinner {
-    width: 50px;
-    height: 50px;
-    border: 10px solid #f3f3f3; /* Light grey */
-    border-top: 10px solid #383636; /* Black */
-    border-radius: 50%;
-    animation: spinner 1.5s linear infinite;
+
+  .reload:hover {
+    background-color: #0F6569;
   }
 
   h1 {
@@ -122,23 +121,36 @@
         h3 {
           margin-block-start: 0px;
           margin-block-end: 0px;
+          margin-bottom: 5px;
+        }
+        
+        a {
+          color: #137E83;
+          text-decoration: underline;
+          text-underline-offset: 4px;
         }
 
-        button {
-          background-color: #137E83;
-          border-radius: 6px;
-          border: none;
-          padding: 10px;
-          width: 150px;
-          color: white;
-          font-weight: bold;
-          margin-top: 18px;
-          transition: all 100ms;
+        input {
+          all: unset;
+          margin-top: 10px;
+          font-size: 15px;
+          color: #A6AEBC;
+        }
+        
+        input::placeHolder {
+          color: #A6AEBC;
         }
 
-        button:hover {
-          background-color: #0F6569;
-
+        .inputbox {
+          display: flex;
+          flex-direction: column;
+          background-color: #F5F7FA;
+          border-radius: 7px;
+          height: auto;
+          width: auto;
+          padding: 6px;
+          padding-bottom: 12px;
+          margin-top: 24px;
         }
 
       }
