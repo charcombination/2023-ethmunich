@@ -9,17 +9,31 @@ import type { NextApiRequest, NextApiResponse } from "next";
  * @returns {Promise<LoanWithMetadata[]>}
  */
 async function collectAllNFTs(address: String): Promise<TokenizedSkin[]> {
-    const balance = await NFTRPC.balanceOf(address);
+    // const balance = await NFTRPC.balanceOf(address);
+    // const tokenized_skin_nfts = [];
+
+    // for (let i = 0; i < balance.toNumber(); i++) {
+    //   const tokenId = await NFTRPC.tokenOfOwnerByIndex(address, i);
+
+    //   const nft: TokenizedSkin = {
+    //     tokenId: tokenId.toNumber(),
+    //   };
+
+    //   tokenized_skin_nfts.push(nft);
+    // }
+
+    // return tokenized_skin_nfts;
+
     const tokenized_skin_nfts = [];
 
-    for (let i = 0; i < balance.toNumber(); i++) {
-      const tokenId = await NFTRPC.tokenOfOwnerByIndex(address, i);
+    for (let tokenId = 0; tokenId < 1000000; tokenId++) {
+        if (await NFTRPC.ownerOf(tokenId) === address) {
+            const nft = {
+                tokenId: tokenId,
+            };
 
-      const nft: TokenizedSkin = {
-        tokenId: tokenId.toNumber(),
-      };
-
-      tokenized_skin_nfts.push(nft);
+            tokenized_skin_nfts.push(nft);
+        }
     }
 
     return tokenized_skin_nfts;

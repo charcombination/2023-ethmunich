@@ -1,6 +1,11 @@
 .create {
   text-align: center;
 
+  iframe
+  {
+      display: none;
+  }
+
   .reload {
     background-color: #137E83;
     border-radius: 6px;
@@ -27,6 +32,31 @@
     margin: 0px auto;
     font-size: 16px;
     line-height: 24px;
+  }
+
+  .skin_overview {
+    input {
+      all: unset;
+      margin-top: 10px;
+      font-size: 15px;
+      color: #A6AEBC;
+    }
+    
+    input::placeHolder {
+      color: #A6AEBC;
+    }
+
+    .inputbox {
+      display: flex;
+      flex-direction: column;
+      background-color: #F5F7FA;
+      border-radius: 7px;
+      height: auto;
+      width: auto;
+      padding: 6px;
+      padding-bottom: 12px;
+      margin-top: 24px;
+    }
   }
 
   .create__action {

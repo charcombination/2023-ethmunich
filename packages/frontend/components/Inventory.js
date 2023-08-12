@@ -7,7 +7,7 @@ const Inventory = ({ inventory: initialInventory, filter, selected, onSelectAsse
 
   const getInventory = (filterString) => {
     const inventory = initialInventory
-      .filter(asset => asset.description.name.toLowerCase().includes(filterString.toLowerCase()))
+      .filter(asset => asset.name.toLowerCase().includes(filterString.toLowerCase()))
       .slice(0, 8)
 
     // if(selected && !inventory.includes(selected)) {
@@ -22,7 +22,7 @@ const Inventory = ({ inventory: initialInventory, filter, selected, onSelectAsse
   }, [filter, initialInventory])
 
   const InventoryElement = ({ asset }) => {
-    const imageURL = `https://community.akamai.steamstatic.com/economy/image/${asset.description.icon_url}/330x`
+    const imageURL = `https://community.akamai.steamstatic.com/economy/image/${asset.icon_url}/330x`
 
     return (
       <button className={styles.inventory_element} onClick={() => onSelectAsset(asset)}>

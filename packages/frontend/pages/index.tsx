@@ -42,10 +42,9 @@ export default function Home(): ReactElement {
       <div>
         {/* Call to action header */}
         <div className={styles.home__cta}>
-          <h1>Lend your NFTs</h1>
+          <h1>Game on, pay off</h1>
           <p>
-            PawNFT is a hybrid auction and lending platform for your NFTs.
-            Borrow against your collection or earn fixed rewards.
+          Use your online game skins as collateral for borrowing money. Get access to instant cash without selling your valuable virtual assets.
           </p>
 
           {/* CTA action buttons */}

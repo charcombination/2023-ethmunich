@@ -10,15 +10,6 @@ import type { NextApiRequest, NextApiResponse } from "next";
  * @returns {Promise<LoanWithMetadata[]>}
  */
 async function collectAllLoans(): Promise<LoanWithMetadata[]> {
-  // FIXME: hack to bypass OpenSea depencency
-  // Retrieve metadata for all NFTs
-  // TODO: Remove Redis
-  // const client = new Redis(process.env.REDIS_URL);
-  // let request = await client.get("metadata");
-  let metadata: Record<string, Record<string, string>> = {};
-  // if (request) {
-  //   metadata = JSON.parse(request);
-  // }
 
   // Collect number of created loans
   const numLoans: BigNumber = await PawnBankRPC.numLoans();
@@ -32,15 +23,13 @@ async function collectAllLoans(): Promise<LoanWithMetadata[]> {
     // Collect loan information from contract
     const loan: any[] = await PawnBankRPC.pawnLoans(i);
     // Collect loan metadata from temporary Redis store
-    const { name, description, imageURL } =
-      metadata[`${loan[0].toLowerCase()}-${loan[3].toString()}`];
 
     // Push loan data
     loans.push({
       loanId: i,
-      name,
-      description,
-      imageURL,
+      name: "name",
+      description: "des",
+      imageURL: "x",
       tokenAddress: loan[0],
       tokenOwner: loan[1],
       lender: loan[2],
@@ -62,7 +51,8 @@ async function collectAllLoans(): Promise<LoanWithMetadata[]> {
 
 // Return loan data
 const loans = async (req: NextApiRequest, res: NextApiResponse) => {
-  res.send(await collectAllLoans());
+  //res.send(await collectAllLoans());
+  res.send([]);
 };
 
 export default loans;

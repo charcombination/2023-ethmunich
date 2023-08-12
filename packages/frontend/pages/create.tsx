@@ -9,7 +9,8 @@ import Inventory from "@components/Inventory"; // Component: Loancard
 import styles from "@styles/pages/Create.module.scss"; // Component styles
 import { ReactElement, useEffect, useState } from "react"; // State management
 import { NextRouter, useRouter } from "next/dist/client/router"; // Next router
-import inventoryMockData from './output_mock.json';
+import inventoryMockData from './inventory_response.json';
+// import { useDebounce } from 'usehooks';
 
 /**
  * Selection states
@@ -47,6 +48,9 @@ export default function Create() {
   const [loanCompleted, setLoanCompleted] = useState<number>(
     new Date().setDate(new Date().getDate() + 7)
   );
+
+  const Cooldown = 300;
+
   // SteamID
   const [gamerTradelink, setGamerTradelink] = useState("");
   const [gamerTradelinkText, setGamerTradelinkText] = useState("");
@@ -56,6 +60,9 @@ export default function Create() {
   const [tradeToken, setTradeToken] = useState("8nUPXs46");
   const [tradeOfferLink, setTradeOfferLink] = useState<String | null>(null);
   const [requireRefresh, setRequireRefresh] = useState(false);
+
+  const [filter, setFilter] = useState("");
+  // const debouncedFilter = useDebounce(filter, Cooldown);
 
   /**
    * Renders button based on current state
@@ -73,7 +80,7 @@ export default function Create() {
       return <button disabled>Select an Asset to Tokenize</button>
     } else if(state === State.tokenizeAsset && tradeOfferLink) {
       // Bot already created the trade offer (final step)
-      return <button onClick={() => {window.open(tradeOfferLink); setState(State.selectNFT)}}>Transfer "{selectedAsset.description.name}" to Tokenize</button>
+      return <button onClick={() => {window.open(tradeOfferLink); setState(State.selectNFT)}}>Transfer "{selectedAsset.name}" to Tokenize</button>
     } else if(state === State.tokenizeAsset && !loading) {
       // Initiate trade offer and setLoading
       return <button onClick={() => requestTradeOffer(selectedAsset.id, address)}>Create Trade Offer</button>
@@ -131,10 +138,10 @@ export default function Create() {
   async function requestTradeOffer(assetID: number, addr: string): Promise<void> {
     const requestData = {
       tradeURL: gamerTradelink, // Replace with your tradeURL
-      itemIds: [15159666845], // Replace with your itemIds array
+      itemIds: [selectedAsset.id], // Replace with your itemIds array
       walletAddress: address // Replace with your wallet address
     };
-    
+
     const response = await axios.post('http://127.0.0.1:3011/api/v1/steam/init-trade', requestData);
     setTradeOfferLink(`https://steamcommunity.com/tradeoffer/${response.data.offerId}`);
   }
@@ -148,7 +155,7 @@ export default function Create() {
       // setLoading(true);
 
       // 
-      setInventory(inventoryMockData.assets);
+      setInventory(inventoryMockData);
 
       // try {
       //   const response = await axios.get(`http://127.0.0.1:3011/items/${steamID}/`);
@@ -170,7 +177,7 @@ export default function Create() {
       setNumOSNFTs(response.data.assets.length);
       setNFTList(response.data);
     } catch (error) {
-      toast.error("Error when collecting wallet NFT's.");
+      //toast.error("Error when collecting wallet NFT's.");
     }
   }
 
@@ -288,8 +295,10 @@ export default function Create() {
                 ) : state === State.tokenizeAsset ? (
                   !gamerTradelink ? <CreateUnauthenticatedSteam gamerTradelinkText={gamerTradelinkText} updateGamerTradelinkText={updateGamerTradelinkText}/> :
                   !inventory[0] ? <CreateLoadingSkins/> :
-                  <Inventory inventory={inventory} filter={"4"} selected={selectedAsset} onSelectAsset={(asset: any) => {setSelectedAsset(asset)}
-                  } />
+                  <div className={styles.skin_overview}>
+                    <input autoFocus type="text" value={filter} onChange={(evt) => setFilter(evt.target.value)} placeholder="Type to filter"/>
+                    <Inventory inventory={inventory} filter={filter} selected={selectedAsset} onSelectAsset={(asset: any) => {setSelectedAsset(asset)}} />
+                  </div>
                 ) : (
                   // Enable user input of terms
                   <div className={styles.create__action_terms}>

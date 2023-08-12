@@ -101,22 +101,15 @@ function Footer(): ReactElement {
     <div className={styles.layout__footer}>
       {/* Credits */}
       <span>
-        Inspired by{" "}
+        Forking {" "}
         <a
-          href="https://twitter.com/MarkBeylin"
+          href="https://github.com/Anish-Agnihotri/pawnft/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Mark
+          PawnNFT by Anish
         </a>
-        . Developed by{" "}
-        <a
-          href="https://twitter.com/_anishagnihotri"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Anish
-        </a>
+        {" "} as Lending Protol
         .
       </span>
     </div>
